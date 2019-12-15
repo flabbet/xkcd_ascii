@@ -22,7 +22,13 @@ fn main(){
 
 
     let comic_id = matches.value_of("comic_id").unwrap_or("");
-    let (w,h) = term_size::dimensions().unwrap();
+    let (mut w, mut h) = term_size::dimensions().unwrap();
+
+    if cfg!(target_os = "windows"){
+        w+=1;
+        h+=1;
+    }
+    
         let dims = match matches.values_of_lossy("resize") {
         Some(v) => v.iter().map(|s| s.parse::<u32>().unwrap()).collect(),
         None => vec![w as u32, h as u32]
