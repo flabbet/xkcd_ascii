@@ -9,7 +9,7 @@ use std::fs::File;
 use std::{io, process};
 use reqwest::Response;
 use scraper::{Html, Selector};
-
+use term_size;
 
 fn main(){
     let matches = App::new("xkcd_ascii")
@@ -22,10 +22,10 @@ fn main(){
 
 
     let comic_id = matches.value_of("comic_id").unwrap_or("");
-
+    let (w,h) = term_size::dimensions().unwrap();
         let dims = match matches.values_of_lossy("resize") {
         Some(v) => v.iter().map(|s| s.parse::<u32>().unwrap()).collect(),
-        None => vec![80u32, 40u32],
+        None => vec![w as u32, h as u32]
     };
 
     let mut url:&str = &format!("https://xkcd.com/{}/", &comic_id);
