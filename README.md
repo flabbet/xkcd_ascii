@@ -24,7 +24,7 @@ To use it, simply type in terminal
 ```
 $ xkcd_ascii
 ```
-It will generate random comic with resolution 80x32 (default terminal size in most linux distros), which is usally too small for nice Ascii Art. That's why `resize` parameter comes into action
+It will generate random comic with automatic, terminal size resolution. `resize` parameter is optional, you can adjust res with it.
 
 ```
 $ xkcd_ascii -s [width] [height]
